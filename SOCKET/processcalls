@@ -1,0 +1,44 @@
+#include <stdio.h>   // Standard input-output header
+#include <unistd.h>  // For fork, getpid, getuid, setuid, sleep
+#include <sys/wait.h> // For wait
+#include <stdlib.h>  // For exit
+#include <sys/types.h> // For nice
+
+int main() {
+    int pid;
+    
+    // Get user ID
+    printf("User ID: %d\n", getuid());
+    
+    // Create a new process
+    pid = fork();
+
+    if (pid == 0) {
+        // Child process
+        printf("This is the child process!\n");
+        printf("Child PID: %d\n", getpid());
+        
+        // Sleeping for 2 seconds
+        sleep(2);
+        
+        printf("Child process is done!\n");
+        
+        // Exit the child process
+        exit(0);
+    } else {
+        // Parent process
+        printf("This is the parent process!\n");
+        printf("Parent PID: %d\n", getpid());
+
+        // Waiting for the child to finish
+        wait(NULL);
+        
+        // Change process priority
+        printf("Changing process priority using nice(5)\n");
+        nice(5);
+        
+        printf("Parent process is done!\n");
+    }
+
+    return 0;
+}
