@@ -3,27 +3,20 @@ def fcfs(processes):
     waiting_time = [0] * n
     turnaround_time = [0] * n
     completion_time = [0] * n
-    
     # Initialize the current time
     current_time = 0
-    
     # Calculate waiting time, turnaround time, and completion time
     for i in range(n):
         if current_time < processes[i]['arrival_time']:
             current_time = processes[i]['arrival_time']
-        
         # Completion Time for the process
         completion_time[i] = current_time + processes[i]['burst_time']
-        
         # Turnaround Time for the process
         turnaround_time[i] = completion_time[i] - processes[i]['arrival_time']
-        
         # Waiting Time for the process
         waiting_time[i] = turnaround_time[i] - processes[i]['burst_time']
-        
         # Update current time to the end of this process
         current_time = completion_time[i]
-
     # Calculate total waiting time and turnaround time
     total_wt = sum(waiting_time)
     total_tt = sum(turnaround_time)
