@@ -761,3 +761,31 @@ fi
 ---
 
 ### 8. **Command-Line
+
+
+
+
+
+#!/bin/bash
+
+# Read a number from the user
+echo -n "Enter a number: "
+read num
+
+# Check if the number is negative
+if [ $num -lt 0 ]; then
+  echo "Invalid input: Factorial is not defined for negative numbers."
+  exit 1
+fi
+
+# Initialize factorial to 1
+factorial=1
+
+# Loop to calculate factorial
+for (( i=1; i<=num; i++ ))
+do
+  factorial=$((factorial * i))
+done
+
+# Display the result
+echo "Factorial of $num is: $factorial"
